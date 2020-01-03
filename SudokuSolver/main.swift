@@ -8,5 +8,26 @@
 
 import Foundation
 
-print("Hello, World!")
 
+
+var matrix: Matrix<Int?> = Matrix(rows: 9, columns: 9,defaultValue:nil)
+
+/*
+print("Please insert the values given. If you don't know a value insert \"-\" or just press enter")
+for i in 0..<matrix.columns {
+	for j in 0..<matrix.rows {
+		clearScreen()
+		print(tableToString())
+		matrix[i, j] = input()
+	}
+	print("Now insert second row")
+}
+*/
+
+matrix = stringToTable(getFileContent(path: "/Users/alex/Desktop/sudoku.txt")!)
+
+
+
+print(tableToString())
+print("Solving...")
+print(getPossibleElements())

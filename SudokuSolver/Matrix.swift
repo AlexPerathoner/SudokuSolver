@@ -62,6 +62,14 @@ extension Matrix {
 		}
 		return matrix
 	}
+	func hasNil() -> Bool {
+		for i in grid {
+			if((i as? Int) == nil) {
+				return true
+			}
+		}
+		return false
+	}
 }
 
 extension Array {
@@ -90,14 +98,14 @@ func filterNil(_ input: [Int?]) -> [Int] {
 	return input.compactMap { $0 }
 }
 
-func getUnusedElements(inRow: Int) -> [Int] {
+func getUnusedElements(_ m: Matrix<Int?>, inRow: Int) -> [Int] {
 	let items = [1,2,3,4,5,6,7,8,9]
-	let row = matrix.getRow(inRow)
+	let row = m.getRow(inRow)
 	return (items - filterNil(row))
 }
-func getUnusedElements(inColumn: Int) -> [Int] {
+func getUnusedElements(_ m: Matrix<Int?>, inColumn: Int) -> [Int] {
 	let items = [1,2,3,4,5,6,7,8,9]
-	let column = matrix.getColumn(inColumn)
+	let column = m.getColumn(inColumn)
 	return (items - filterNil(column))
 }
 func getUnusedElements(inChunk: Matrix<Int?>) -> [Int] {
@@ -106,22 +114,60 @@ func getUnusedElements(inChunk: Matrix<Int?>) -> [Int] {
 }
 
 
-func getPossibleElements(inRow: Int, inColumn: Int) -> [Int] {
-	let setA = Set(getUnusedElements(inRow: inRow))
-	let setB = Set(getUnusedElements(inChunk: matrix.getChunk(Int(inRow/3), Int(inColumn/3))))
-	var intersection = setA.intersection(getUnusedElements(inColumn: inColumn))
+func getPossibleElements(_ m: Matrix<Int?>, inRow: Int, inColumn: Int) -> [Int]? {
+	let setA = Set(getUnusedElements(m, inRow: inRow))
+	let setB = Set(getUnusedElements(inChunk: m.getChunk(Int(inRow/3), Int(inColumn/3))))
+	let setC = getUnusedElements(m, inColumn: inColumn)
+//	print(setA)
+//	print(setB)
+//	print(setC)
+	var intersection = setA.intersection(setC)
 	intersection = intersection.intersection(setB)
+//	print(intersection)
 	return intersection.sorted()
 }
 
-func getPossibleElements() -> Matrix<[Int]> {
+func getPossibleElements(_ m: Matrix<Int?>) -> Matrix<[Int]> {
 	var tempMatrix = Matrix<[Int]>(rows: 9, columns: 9, defaultValue: [])
-	for i in 0..<8 {
-		for j in 0..<8 {
-			if(matrix[i, j] == nil) {
-				tempMatrix[i, j] = getPossibleElements(inRow: i, inColumn: j)
+	for i in 0..<9 {
+		for j in 0..<9 {
+			if(m[i, j] == nil) {
+				//print("Searching possible ns for x:\(j) y:\(i)...")
+				//print(getPossibleElements(m, inRow: 0, inColumn: 8))
+				//print(m[i, j])
+				//print("new item's: \(newItem)")
+				tempMatrix[i, j] = getPossibleElements(m, inRow: i, inColumn: j) ?? []
 			}
 		}
 	}
 	return tempMatrix
 }
+
+func findBestCell(m: Matrix<[Int]>) -> (x:Int, y:Int, value:Int)? {
+	var filterCounter = 1
+	var d = [[Int]]()
+	// FIXME: Caution! Only works if there is at least one certain cell
+	
+	
+	while d.isEmpty && filterCounter < 9 {
+		d = m.grid.filter({$0.count == filterCounter})
+		filterCounter += 1
+	}
+	if d.isEmpty {
+		return nil
+	}
+	let index = m.grid.firstIndex(of: d[0])!
+	let x = (index)%9
+	let y = Int(index/9)
+	return (x, y, d[0][0])
+}
+
+
+
+
+//
+//func toTuple(text: String) -> (Int, Int) {
+//	let splitted = text.split(separator: " ")
+//	return (Int(splitted[0]), Int(splitted[1]))
+//}
+

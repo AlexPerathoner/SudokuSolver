@@ -24,10 +24,21 @@ for i in 0..<matrix.columns {
 }
 */
 
-matrix = stringToTable(getFileContent(path: "/Users/alex/Desktop/sudoku.txt")!)
+
+matrix = stringToTable(getFileContent(path: "/Users/alex/Desktop/sudoku2.txt")!)
 
 
-
-print(tableToString())
 print("Solving...")
-print(getPossibleElements())
+
+print(tableToString(matrix))
+while(matrix.hasNil()) {
+	if let cell = findBestCell(m: getPossibleElements(matrix)) {
+		matrix[cell.y, cell.x] = cell.value
+		print("Added \(cell)")
+	}
+	clearScreen()
+	print(tableToString(matrix))
+}
+
+
+//print(matrix)

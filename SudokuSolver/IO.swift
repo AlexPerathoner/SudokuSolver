@@ -12,11 +12,11 @@ func input() -> Int? {
 	return Int(readLine()!)
 }
 
-func tableToString() -> String {
+func tableToString(_ m: Matrix<Int?>) -> String {
 	var str = ""
 	for i in 0..<9 {
 		for j in 0..<9 {
-			if let a = matrix[i, j] {
+			if let a = m[i, j] {
 				str += String(a)
 			} else {
 				str += "_"

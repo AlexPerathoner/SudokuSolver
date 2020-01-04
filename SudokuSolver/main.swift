@@ -30,10 +30,14 @@ matrix = stringToTable(getFileContent(path: "/Users/alex/Desktop/sudoku3.txt")!)
 print(tableToString(matrix))
 print("Solving...")
 var historyMoves = [(x: Int, y: Int, value: Int)]()
-
+let methodStart = Date()
 if(solve(m: &matrix, old: &historyMoves)) {
 	print("Solved!")
 	print(tableToString(matrix))
 } else {
 	print("No solutions found")
 }
+
+let methodFinish = Date()
+let executionTime = methodFinish.timeIntervalSince(methodStart)
+print("Execution time: \(executionTime)")

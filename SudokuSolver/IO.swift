@@ -8,10 +8,6 @@
 
 import Foundation
 
-func input() -> Int? {
-	return Int(readLine()!)
-}
-
 func tableToString(_ m: Matrix<Int?>) -> String {
 	var str = ""
 	for i in 0..<9 {
@@ -41,19 +37,6 @@ func stringToTable(_ text: String) -> Matrix<Int?> {
 		i += 1
 	}
 	return matrix
-}
-
-/*
-func clearScreen() {
-	print("\u{001B}")
-}*/
-
-func clearScreen() {
-        let clearScreen = Process()
-        clearScreen.launchPath = "/usr/bin/clear"
-        clearScreen.arguments = []
-        clearScreen.launch()
-        clearScreen.waitUntilExit()
 }
 
 func getFileContent(path: String) -> String? {

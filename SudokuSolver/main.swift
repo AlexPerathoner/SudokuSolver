@@ -12,20 +12,11 @@ import Foundation
 
 var matrix: Matrix<Int?> = Matrix(rows: 9, columns: 9,defaultValue:nil)
 
-/*
-print("Please insert the values given. If you don't know a value insert \"-\" or just press enter")
-for i in 0..<matrix.columns {
-	for j in 0..<matrix.rows {
-		clearScreen()
-		print(tableToString())
-		matrix[i, j] = input()
-	}
-	print("Now insert second row")
-}
-*/
+print("Insert path of file with sudoku to solve: ")
+let path = readLine()
 
 
-matrix = stringToTable(getFileContent(path: "/Users/alex/Desktop/sudoku3.txt")!)
+matrix = stringToTable(getFileContent(path: path ?? "/Users/alex/Desktop/sudoku3.txt")!)
 
 print(tableToString(matrix))
 print("Solving...")

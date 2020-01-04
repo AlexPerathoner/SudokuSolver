@@ -25,20 +25,15 @@ for i in 0..<matrix.columns {
 */
 
 
-matrix = stringToTable(getFileContent(path: "/Users/alex/Desktop/sudoku2.txt")!)
-
-
-print("Solving...")
+matrix = stringToTable(getFileContent(path: "/Users/alex/Desktop/sudoku3.txt")!)
 
 print(tableToString(matrix))
-while(matrix.hasNil()) {
-	if let cell = findBestCell(m: getPossibleElements(matrix)) {
-		matrix[cell.y, cell.x] = cell.value
-		print("Added \(cell)")
-	}
-	clearScreen()
+print("Solving...")
+var historyMoves = [(x: Int, y: Int, value: Int)]()
+
+if(solve(m: &matrix, old: &historyMoves)) {
+	print("Solved!")
 	print(tableToString(matrix))
+} else {
+	print("No solutions found")
 }
-
-
-//print(matrix)

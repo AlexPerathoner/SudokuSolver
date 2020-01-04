@@ -53,6 +53,12 @@ extension Matrix {
 		}
 		return columnToReturn
 	}
+	/// Returns a 3x3 matrix relative to one of the 9 chunks in the sudoku
+	/// - Parameters:
+	///   - x: x coordinate of the chunk
+	///   - y: y coordinate of the chunk
+	/// - Returns:
+	///	  - 3x3 matrix
 	func getChunk(_ x: Int, _ y: Int) -> Matrix<Int?> {
 		var matrix: Matrix<Int?> = Matrix<Int?>(rows: 3, columns: 3,defaultValue:nil)
 		for i in 0..<3 {
@@ -62,6 +68,9 @@ extension Matrix {
 		}
 		return matrix
 	}
+	
+	/// - Returns:
+	/// true if the matrix contains nil values
 	func hasNil() -> Bool {
 		for i in grid {
 			if((i as? Int) == nil) {
@@ -73,6 +82,8 @@ extension Matrix {
 }
 
 extension Array {
+	/// by Paul Hudson -> https://www.hackingwithswift.com/example-code/language/how-to-split-an-array-into-chunks
+	/// - Parameter size: length of each sub array
 	func chunked(into size: Int) -> [[Element]] {
 		return stride(from: 0, to: count, by: size).map {
 			Array(self[$0 ..< Swift.min($0 + size, count)])
@@ -80,94 +91,12 @@ extension Array {
 	}
 }
 extension Array where Element:Hashable {
+	/// by Rob Caraway -> https://stackoverflow.com/questions/29727618/find-duplicate-elements-in-array-using-swift
+	/// - Returns:
+	///   - Array with elements that appeared more than once in the given array
 	func getDuplicates() -> [Element] {
-		//by Rob Caraway -> https://stackoverflow.com/questions/29727618/find-duplicate-elements-in-array-using-swift
 		return [Element](Dictionary(grouping: self, by: {$0}).filter { $1.count > 1 }.keys)
 	}
 }
 
-func hasMultipleItems(inRow: Int) -> Bool {
-	let row = matrix.getRow(inRow)
-	return !(filterNil(row)).getDuplicates().isEmpty
-}
-func hasMultipleItems(inColumn: Int) -> Bool {
-	let column = matrix.getColumn(inColumn)
-	return !(filterNil(column)).getDuplicates().isEmpty
-}
-func filterNil(_ input: [Int?]) -> [Int] {
-	return input.compactMap { $0 }
-}
-
-func getUnusedElements(_ m: Matrix<Int?>, inRow: Int) -> [Int] {
-	let items = [1,2,3,4,5,6,7,8,9]
-	let row = m.getRow(inRow)
-	return (items - filterNil(row))
-}
-func getUnusedElements(_ m: Matrix<Int?>, inColumn: Int) -> [Int] {
-	let items = [1,2,3,4,5,6,7,8,9]
-	let column = m.getColumn(inColumn)
-	return (items - filterNil(column))
-}
-func getUnusedElements(inChunk: Matrix<Int?>) -> [Int] {
-	let items = [1,2,3,4,5,6,7,8,9]
-	return (items - filterNil(inChunk.grid))
-}
-
-
-func getPossibleElements(_ m: Matrix<Int?>, inRow: Int, inColumn: Int) -> [Int]? {
-	let setA = Set(getUnusedElements(m, inRow: inRow))
-	let setB = Set(getUnusedElements(inChunk: m.getChunk(Int(inRow/3), Int(inColumn/3))))
-	let setC = getUnusedElements(m, inColumn: inColumn)
-//	print(setA)
-//	print(setB)
-//	print(setC)
-	var intersection = setA.intersection(setC)
-	intersection = intersection.intersection(setB)
-//	print(intersection)
-	return intersection.sorted()
-}
-
-func getPossibleElements(_ m: Matrix<Int?>) -> Matrix<[Int]> {
-	var tempMatrix = Matrix<[Int]>(rows: 9, columns: 9, defaultValue: [])
-	for i in 0..<9 {
-		for j in 0..<9 {
-			if(m[i, j] == nil) {
-				//print("Searching possible ns for x:\(j) y:\(i)...")
-				//print(getPossibleElements(m, inRow: 0, inColumn: 8))
-				//print(m[i, j])
-				//print("new item's: \(newItem)")
-				tempMatrix[i, j] = getPossibleElements(m, inRow: i, inColumn: j) ?? []
-			}
-		}
-	}
-	return tempMatrix
-}
-
-func findBestCell(m: Matrix<[Int]>) -> (x:Int, y:Int, value:Int)? {
-	var filterCounter = 1
-	var d = [[Int]]()
-	// FIXME: Caution! Only works if there is at least one certain cell
-	
-	
-	while d.isEmpty && filterCounter < 9 {
-		d = m.grid.filter({$0.count == filterCounter})
-		filterCounter += 1
-	}
-	if d.isEmpty {
-		return nil
-	}
-	let index = m.grid.firstIndex(of: d[0])!
-	let x = (index)%9
-	let y = Int(index/9)
-	return (x, y, d[0][0])
-}
-
-
-
-
-//
-//func toTuple(text: String) -> (Int, Int) {
-//	let splitted = text.split(separator: " ")
-//	return (Int(splitted[0]), Int(splitted[1]))
-//}
 

@@ -10,6 +10,7 @@
 		FA262E0E23BE6203005C2E49 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA262E0D23BE6203005C2E49 /* main.swift */; };
 		FA262E1523BE6338005C2E49 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA262E1423BE6338005C2E49 /* Matrix.swift */; };
 		FA262E1723BE63B1005C2E49 /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA262E1623BE63B1005C2E49 /* IO.swift */; };
+		FA262E1923BF6219005C2E49 /* MatrixOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA262E1823BF6219005C2E49 /* MatrixOperations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +30,7 @@
 		FA262E0D23BE6203005C2E49 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FA262E1423BE6338005C2E49 /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 		FA262E1623BE63B1005C2E49 /* IO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IO.swift; sourceTree = "<group>"; };
+		FA262E1823BF6219005C2E49 /* MatrixOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixOperations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				FA262E0D23BE6203005C2E49 /* main.swift */,
 				FA262E1623BE63B1005C2E49 /* IO.swift */,
 				FA262E1423BE6338005C2E49 /* Matrix.swift */,
+				FA262E1823BF6219005C2E49 /* MatrixOperations.swift */,
 			);
 			path = SudokuSolver;
 			sourceTree = "<group>";
@@ -128,6 +131,7 @@
 			files = (
 				FA262E1523BE6338005C2E49 /* Matrix.swift in Sources */,
 				FA262E0E23BE6203005C2E49 /* main.swift in Sources */,
+				FA262E1923BF6219005C2E49 /* MatrixOperations.swift in Sources */,
 				FA262E1723BE63B1005C2E49 /* IO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -43,22 +43,21 @@ func stringToTable(_ text: String) -> Matrix<Int?> {
 	return matrix
 }
 
-
+/*
 func clearScreen() {
 	print("\u{001B}")
-}
-/*
+}*/
+
 func clearScreen() {
         let clearScreen = Process()
         clearScreen.launchPath = "/usr/bin/clear"
         clearScreen.arguments = []
         clearScreen.launch()
         clearScreen.waitUntilExit()
-}*/
+}
 
 func getFileContent(path: String) -> String? {
 	do {
-		// Get the contents
 		let contents = try String(contentsOfFile: path, encoding: .utf8)
 		return contents
 	}

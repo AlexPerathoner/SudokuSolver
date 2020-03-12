@@ -5,11 +5,11 @@
 Command line tool in Swift to solve sudokus using recursion and multiple cores.
 
 
-##How it works
+## How it works
 SudokuSolver has one simple function: solve(). This function is called recoursively and what it does is check what numbers could be added to the table. If there are none, SudokuSolver tries another combination.
 
 
-##Performance
+## Performance
 The results of some tests are shown below.
 The times indicated are compared to the first version of *SudokuSolver*, which used only recursion, and to the second version, which also uses multiple threads.
 
@@ -31,7 +31,7 @@ The times indicated are compared to the first version of *SudokuSolver*, which u
 
 As you can see the only-recursion is effectively only with sudokus which have fewer combinations. However, with difficult sudoku it starts to be worth creating more threads, up to the "[World's Hardest Sudoku](https://gizmodo.com/can-you-solve-the-10-hardest-logic-puzzles-ever-created-1064112665)", which is solved in 51% in less time.
 
-##How to use
+## How to use
 *SudokuSolver* takes an input file that could look like this:
 
 ```-6---7---
@@ -61,11 +61,11 @@ Output will look like this:
 <br>
 <br>
 <br>
-##Credits
+## Credits
 Thanks to [amiantos](https://gist.github.com/amiantos) for creating his [Toroidal Matrix](https://gist.github.com/amiantos/bb0f313da1ee686f4f69b8b44f3cd184) and inspiring me to create this project.
 <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
-##License
+## License
 
 This project is licensed under the GPL-3.0 License - see the [LICENSE.md](LICENSE.md) file for details
 

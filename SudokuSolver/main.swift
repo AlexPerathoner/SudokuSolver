@@ -33,14 +33,15 @@ var sol: Matrix<Int?> = matrix {
 		let methodFinish = Date()
 		let executionTime = methodFinish.timeIntervalSince(methodStart)
 		print("Execution time: \(executionTime)")
-		exit(2)
+		exit(0)
 	}
 }
 
 DispatchQueue.global(qos: .background).async {
-	let solver = Solver(matrix, historyMoves)
-	solver.start()
+	let solver = Solver(matrix, historyMoves, 0)
+	//solver.start()
+	solver.main()
 }
 
-sleep(10)
+sleep(405)
 print("No solutions found")

@@ -1,9 +1,11 @@
 //
-//  Matrix.swift
-//  SudokuSolver
+//  ToroidalMatrix.swift
+//  Derived from dimo hamdy https://stackoverflow.com/a/53421491/2117288
+//  https://gist.github.com/amiantos/bb0f313da1ee686f4f69b8b44f3cd184
 //
-//  Created by Alex Perathoner on 02/01/2020.
-//  Copyright © 2020 Alex Perathoner. All rights reserved.
+//  This Source Code Form is subject to the terms of the Mozilla Public
+//  License, v. 2.0. If a copy of the MPL was not distributed with this
+//  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
 import Foundation

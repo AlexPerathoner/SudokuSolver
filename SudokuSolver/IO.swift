@@ -22,6 +22,7 @@ func tableToString(_ m: Matrix<Int?>) -> String {
 		if(i == 2 || i == 5) {str += "\n"}
 		str += "\n"
 	}
+	str += "\n"
 	return str
 }
 

@@ -14,7 +14,7 @@ var matrix: Matrix<Int?> = Matrix(rows: 9, columns: 9,defaultValue:nil)
 
 print("Insert path of file with sudoku to solve: ")
 var path = readLine()!
-let defaultPath = "/Users/alex/Desktop/sudoku3.txt"
+let defaultPath = "/Users/alex/Desktop/sudoku.txt"
 if(path == "") {path = defaultPath}
 
 
@@ -24,26 +24,23 @@ print(tableToString(matrix))
 print("Solving...")
 var historyMoves = [(x: Int, y: Int, value: Int)]()
 
-/*
-var combinations: CUnsignedLongLong = 1
-for i in getPossibleElements(matrix).grid {
-	if (i.count > 0)
-	{
-		combinations = combinations * UInt64(i.count)
-		
+let methodStart = Date()
+
+var sol: Matrix<Int?> = matrix {
+	didSet {
+		print("Solved!")
+		print(tableToString(sol))
+		let methodFinish = Date()
+		let executionTime = methodFinish.timeIntervalSince(methodStart)
+		print("Execution time: \(executionTime)")
+		exit(2)
 	}
 }
-print("There are \(combinations) combinations in this sudoku!")
-*/
 
-let methodStart = Date()
-if(solve(m: &matrix, old: &historyMoves)) {
-	print("Solved!")
-	print(tableToString(matrix))
-} else {
-	print("No solutions found")
+DispatchQueue.global(qos: .background).async {
+	let solver = Solver(matrix, historyMoves)
+	solver.start()
 }
 
-let methodFinish = Date()
-let executionTime = methodFinish.timeIntervalSince(methodStart)
-print("Execution time: \(executionTime)")
+sleep(10)
+print("No solutions found")

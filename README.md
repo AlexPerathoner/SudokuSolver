@@ -67,7 +67,7 @@ Thanks to [amiantos](https://gist.github.com/amiantos) for creating his [Toroida
 
 ## License
 
-This project is licensed under the GPL-3.0 License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ---
 Donations are welcome!
